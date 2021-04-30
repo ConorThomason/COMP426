@@ -5,6 +5,8 @@
 }
 
 .columns {
+  display: flex;
+  align-items: stretch;
   padding-top: 100px;
   padding-right: 50px;
 }
