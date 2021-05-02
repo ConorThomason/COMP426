@@ -4,7 +4,7 @@ import 'bulma/css/bulma.min.css';
 import './App.scss';
 import ThemeMode from './ThemeChanger';
 import './stylesheet.scss';
-import {Columns, Content, Heading} from "react-bulma-components";
+import {Columns} from "react-bulma-components";
 
 const App = () => {
 		return <div className="App">
