@@ -2,7 +2,7 @@ const User = require('../models/model')
 
 createUser = (req, res) => {
 	const body = req.body
-	console.log("Attempting to post");
+	console.log("Attempting to post" + JSON.stringify(body));
 	if (!body) {
 		return res.status(400).json({
 			success: false,
@@ -96,19 +96,20 @@ deleteUser = async (req, res) => {
 	}
 }
 
-getUserById = async (req, res) => {
-	await User.findOne({_id: req.params.id}, (err, user) => {
+getUser = async (req, res) => {
+	console.log("Attempting to find: " + req.params.username);
+	await User.findOne({username: req.params.username}, (err, user) => {
 		if (err) {
-			return res.status(400).json({success: false, error: err})
+			return res.status(400).json({success: false, error: err, verified: false})
 		}
 
 		if (!user) {
 			return res
 				.status(404)
-				.json({success: false, error: 'User not found'})
+				.json({success: false, error: 'User not found', verified: false})
 		}
-		return res.status(200).json({success: true, data: user})
-	}).catch(err => console.log(err))
+		return res.status(200).json({success: true, data: user, verified: true})
+	}).catch(err => console.log(err));
 }
 
 getUsers = async(req, res) => {
@@ -129,6 +130,6 @@ module.exports = {
 	createUser,
 	updateUser,
 	deleteUser,
-	getUserById,
+	getUser,
 	getUsers,
 }
